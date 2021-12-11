@@ -10,12 +10,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.stitbd.paddlecourierrider.Adaptar.CollectionAdaptar.Collectionadaptar;
 import com.stitbd.paddlecourierrider.Model.Collection.CollectionContainer;
 import com.stitbd.paddlecourierrider.Network.Api;
 import com.stitbd.paddlecourierrider.Network.RetrofitClient;
 import com.stitbd.paddlecourierrider.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,6 +70,23 @@ public class CollectionParcelActivity extends AppCompatActivity {
                     Collectionadaptar adaptar = new Collectionadaptar(response.body().getParcels(), getApplicationContext());
                     recyclerView.setAdapter(adaptar);
                     Log.e("ddd",String.valueOf(response.body().getParcels().size()));
+                }
+                else {
+                    try {
+                        // Log.e("tesstss", response.errorBody().string());
+                        try {
+                            JSONObject json = new JSONObject(response.errorBody().string().toString());
+                            Toast.makeText(CollectionParcelActivity.this, json.getString("message"), Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // String a=response.errorBody().string().toString();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    progressDialog.dismiss();
+
                 }
             }
 

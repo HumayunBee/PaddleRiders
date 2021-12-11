@@ -3,6 +3,7 @@ package com.stitbd.paddlecourierrider.Activity.ReturnParcel;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -38,6 +39,15 @@ public class ReturnAcceptParcelActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.rv_pickup_list);
 
+        SwipeRefreshLayout Swip=findViewById(R.id.swip);
+        Swip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                datainitialize();
+                Swip.setRefreshing(false);
+            }
+        });
+
         TextView toolbar = findViewById(R.id.tv_toolbar_title);
         toolbar.setText("Accept Return Parcel");
         ImageView toolbarBack = findViewById(R.id.tv_back);
@@ -54,7 +64,11 @@ public class ReturnAcceptParcelActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
 
         api = RetrofitClient.get(getApplicationContext()).create(Api.class);
+        datainitialize();
 
+    }
+
+    public void datainitialize() {
         api.getReturnparcellist().enqueue(new Callback<ReturnListContainer>() {
             @Override
             public void onResponse(Call<ReturnListContainer> call, Response<ReturnListContainer> response) {
@@ -74,7 +88,7 @@ public class ReturnAcceptParcelActivity extends AppCompatActivity {
                                 LinearLayoutManager.VERTICAL, false));
                         RequestReturnAdaptar adaptar = new RequestReturnAdaptar(parcelInfos, getApplicationContext());
                         recyclerView.setAdapter(adaptar);
-                        Log.e("ddd",String.valueOf(response.body().getParcels().size()));
+                        Log.e("ddd", String.valueOf(response.body().getParcels().size()));
                     }
                 }
             }

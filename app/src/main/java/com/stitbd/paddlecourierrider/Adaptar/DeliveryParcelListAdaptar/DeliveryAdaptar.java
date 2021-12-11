@@ -1,9 +1,13 @@
 package com.stitbd.paddlecourierrider.Adaptar.DeliveryParcelListAdaptar;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,7 +50,7 @@ public class DeliveryAdaptar extends RecyclerView.Adapter<DeliveryAdaptar.Viewho
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull DeliveryAdaptar.Viewholders holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull DeliveryAdaptar.Viewholders holder, @SuppressLint("RecyclerView") int position) {
 
         holder.Invoice.setText(String.valueOf(delivery.get(position).getParcelInvoice()));
         holder.CustomerName.setText(String.valueOf(delivery.get(position).getCustomerName()));
@@ -55,7 +59,22 @@ public class DeliveryAdaptar extends RecyclerView.Adapter<DeliveryAdaptar.Viewho
         holder.TotalCollectAmount.setText(String.valueOf(delivery.get(position).getCollectAmount()));
         holder.MerchantName.setText(String.valueOf(delivery.get(position).getMerchantName()));
         holder.ParcelStatus.setText(String.valueOf(delivery.get(position).getParcelStatus()));
-        holder.optionMenu.setOnClickListener(new DeliveryMenuClickListener(this, listener, holder, delivery.get(position)));
+        holder.optionMenu.setOnClickListener(new DeliveryMenuClickListener(this,
+                listener, holder, delivery.get(position)));
+        holder.Mercahntphn.setText(String.valueOf(delivery.get(position).getMerchantContactNumber()));
+
+
+        holder.Call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String call = delivery.get(position).getCustomerContactNumber();
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse(call));
+                context.startActivity(intent);
+
+
+            }
+        });
 
     }
 
@@ -66,8 +85,10 @@ public class DeliveryAdaptar extends RecyclerView.Adapter<DeliveryAdaptar.Viewho
 
     public class Viewholders extends RecyclerView.ViewHolder {
 
-        TextView Invoice, CustomerName, CustomerPhn, CustomerAddress, TotalCollectAmount, MerchantName, ParcelStatus;
+        TextView Invoice, CustomerName, CustomerPhn, CustomerAddress,
+                TotalCollectAmount, MerchantName, ParcelStatus, Mercahntphn;
         ImageView optionMenu;
+        Button Call;
 
         public Viewholders(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -79,7 +100,9 @@ public class DeliveryAdaptar extends RecyclerView.Adapter<DeliveryAdaptar.Viewho
             TotalCollectAmount = itemView.findViewById(R.id.tv_amount);
             MerchantName = itemView.findViewById(R.id.tv_merchant_name);
             ParcelStatus = itemView.findViewById(R.id.tv_status);
-            optionMenu=itemView.findViewById(R.id.iv_menu);
+            optionMenu = itemView.findViewById(R.id.iv_menu);
+/*            Call=itemView.findViewById(R.id.call);*/
+            Mercahntphn = itemView.findViewById(R.id.tv_merchant_phn);
         }
 
         public ImageView getoption() {

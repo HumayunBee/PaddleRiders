@@ -10,12 +10,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.stitbd.paddlecourierrider.Activity.DeliveryParcel.RequestDeliveryActivity;
 import com.stitbd.paddlecourierrider.Adaptar.PaidAmount.PaidAmountAdaptar;
 import com.stitbd.paddlecourierrider.Model.PaidAmount.PaidAmountContainers;
 import com.stitbd.paddlecourierrider.Network.Api;
 import com.stitbd.paddlecourierrider.Network.RetrofitClient;
 import com.stitbd.paddlecourierrider.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,6 +69,23 @@ public class PaidAmountActivity extends AppCompatActivity {
                     PaidAmountAdaptar adaptar = new PaidAmountAdaptar(response.body().getParcels(), getApplicationContext());
                     recyclerView.setAdapter(adaptar);
                     Log.e("ddd", String.valueOf(response.body().getParcels().size()));
+                }
+                else {
+                    try {
+                        // Log.e("tesstss", response.errorBody().string());
+                        try {
+                            JSONObject json = new JSONObject(response.errorBody().string().toString());
+                            Toast.makeText(PaidAmountActivity.this, json.getString("message"), Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // String a=response.errorBody().string().toString();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    progressDialog.dismiss();
+
                 }
             }
 

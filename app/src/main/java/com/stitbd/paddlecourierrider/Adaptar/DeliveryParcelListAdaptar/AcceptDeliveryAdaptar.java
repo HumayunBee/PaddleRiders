@@ -43,8 +43,8 @@ public class AcceptDeliveryAdaptar extends RecyclerView.Adapter<AcceptDeliveryAd
         holder.CustomerName.setText(String.valueOf(delivery.get(position).getCustomerName()));
         holder.CustomerPhn.setText(String.valueOf(delivery.get(position).getCustomerContactNumber()));
         holder.CustomerAddress.setText(String.valueOf(delivery.get(position).getCustomerAddress()));
-        holder.TotalCollectAmount.setText("Collection Amount :" + String.valueOf(delivery.get(position).getCollectAmount()));
-        holder.MerchantName.setText("Merchant Name :" + String.valueOf(delivery.get(position).getMerchantName()));
+        holder.TotalCollectAmount.setText(String.valueOf(delivery.get(position).getCollectAmount()));
+        holder.MerchantName.setText( String.valueOf(delivery.get(position).getMerchantName()));
         holder.ParcelStatus.setText(String.valueOf(delivery.get(position).getParcelStatus()));
         holder.optionMenu.setVisibility(View.GONE);
     }

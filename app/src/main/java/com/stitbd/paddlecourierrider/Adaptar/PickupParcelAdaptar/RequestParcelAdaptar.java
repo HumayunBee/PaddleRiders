@@ -49,8 +49,8 @@ public class RequestParcelAdaptar extends RecyclerView.Adapter<RequestParcelAdap
         holder.CustomerName.setText(String.valueOf(pickup.get(position).getCustomerName()));
         holder.CustomerPhn.setText(String.valueOf(pickup.get(position).getCustomerContactNumber()));
         holder.CustomerAddress.setText(String.valueOf(pickup.get(position).getCustomerAddress()));
-        holder.TotalCollectAmount.setText("Collection Amount :" + String.valueOf(pickup.get(position).getTotalCollectAmount()));
-        holder.MerchantName.setText("Merchant Name :" + String.valueOf(pickup.get(position).getMerchantName()));
+        holder.TotalCollectAmount.setText(String.valueOf(pickup.get(position).getTotalCollectAmount()));
+        holder.MerchantName.setText( String.valueOf(pickup.get(position).getMerchantName()));
         holder.ParcelStatus.setText(String.valueOf(pickup.get(position).getParcelStatus()));
 
         holder.optionMenu.setOnClickListener(new RequestMenuClickListener(this,
