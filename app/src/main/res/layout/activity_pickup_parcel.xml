@@ -29,6 +29,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/five" />
 
+    <!--        <ImageButton
+                android:id="@+id/call"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_call_24"/>-->
+
 
 
         </LinearLayout>

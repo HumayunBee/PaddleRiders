@@ -44,7 +44,6 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_size_h1"
                     android:text="@string/login"
-                    style="@style/PlayFairBold"
                     android:textColor="@color/black"
                     android:layout_gravity="center_horizontal"/>
 
@@ -62,7 +61,7 @@
                     android:layout_marginStart="@dimen/twenty"
                     android:layout_marginEnd="@dimen/twenty"
                     android:layout_marginTop="@dimen/twenty"
-                    style="@style/RobotoRegular"
+
                     android:drawableStart="@drawable/ic_email_25_grey"
                     android:gravity="center_vertical"
                     tools:ignore="RtlCompat" />
@@ -79,7 +78,7 @@
                     android:background="@drawable/bg_input_field"
                     android:layout_marginStart="@dimen/twenty"
                     android:layout_marginEnd="@dimen/twenty"
-                    style="@style/RobotoRegular"
+
                     android:layout_marginTop="@dimen/twenty"
                     android:drawablePadding="@dimen/ten"
                     android:drawableStart="@drawable/ic_password_25_grey"
@@ -94,7 +93,7 @@
                     android:layout_marginStart="@dimen/twentyFive"
                     android:layout_marginTop="@dimen/thirty"
                     android:layout_marginBottom="@dimen/twenty"
-                    style="@style/PlayFairBold"
+
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:text="@string/login"
                     android:textColor="@color/white"

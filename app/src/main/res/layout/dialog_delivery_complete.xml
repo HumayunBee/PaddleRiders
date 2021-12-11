@@ -36,7 +36,7 @@
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/RobotoMedium"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/ten"
@@ -67,7 +67,7 @@
                 android:visibility="gone">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/RobotoMedium"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/ten"
@@ -83,7 +83,7 @@
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/et_amount"
-                    style="@style/RobotoMedium"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_input_field"
@@ -108,7 +108,7 @@
                 android:visibility="gone">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/RobotoMedium"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/ten"
@@ -127,7 +127,7 @@
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/et_code"
-                        style="@style/RobotoMedium"
+
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_input_field"
@@ -162,7 +162,7 @@
                 android:visibility="gone">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/RobotoMedium"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/ten"
@@ -176,7 +176,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_date"
-                    style="@style/RobotoMedium"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_input_field"
@@ -199,7 +199,7 @@
                 android:visibility="gone">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/RobotoMedium"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/ten"
@@ -213,7 +213,7 @@
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/et_note"
-                    style="@style/RobotoMedium"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_input_field"
@@ -229,7 +229,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_confirm"
-                style="@style/RobotoMedium"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/thirty"

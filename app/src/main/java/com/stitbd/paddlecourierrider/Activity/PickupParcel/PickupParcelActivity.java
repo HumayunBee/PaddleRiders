@@ -42,6 +42,10 @@ public class PickupParcelActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     SwipeRefreshLayout Swip;
 
+ /*   ImageButton Call;
+
+    String phnno= "0123456789";*/
+
 
 
     @Override
@@ -50,6 +54,11 @@ public class PickupParcelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pickup_parcel);
 
         recyclerView = findViewById(R.id.rv_pickup_list);
+
+/*        Call=findViewById(R.id.call);*/
+
+
+
         Swip=findViewById(R.id.swip);
         Swip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
