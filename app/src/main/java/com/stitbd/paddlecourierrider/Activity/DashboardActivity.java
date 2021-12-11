@@ -51,6 +51,7 @@ public class DashboardActivity extends AppCompatActivity {
     //    RecyclerView recyclerView;
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
+
     ProgressDialog progressDialog;
     SwipeRefreshLayout swipeRefreshLayout;
 
