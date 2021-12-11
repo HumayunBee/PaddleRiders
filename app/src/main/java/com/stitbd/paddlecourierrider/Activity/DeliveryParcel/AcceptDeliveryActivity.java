@@ -3,12 +3,14 @@ package com.stitbd.paddlecourierrider.Activity.DeliveryParcel;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.stitbd.paddlecourierrider.Adaptar.DeliveryParcelListAdaptar.AcceptDeliveryAdaptar;
 import com.stitbd.paddlecourierrider.Adaptar.DeliveryParcelListAdaptar.RequestDeliveryAdaptar;
@@ -18,6 +20,10 @@ import com.stitbd.paddlecourierrider.Network.Api;
 import com.stitbd.paddlecourierrider.Network.RetrofitClient;
 import com.stitbd.paddlecourierrider.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +45,15 @@ public class AcceptDeliveryActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.rv_pickup_list);
 
+        SwipeRefreshLayout Swip=findViewById(R.id.swip);
+        Swip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                datainitialize();
+                Swip.setRefreshing(false);
+            }
+        });
+
         TextView toolbar = findViewById(R.id.tv_toolbar_title);
         toolbar.setText("Accept Delivery Parcel");
         ImageView toolbarBack = findViewById(R.id.tv_back);
@@ -56,6 +71,10 @@ public class AcceptDeliveryActivity extends AppCompatActivity {
 
         api = RetrofitClient.get(getApplicationContext()).create(Api.class);
 
+       datainitialize();
+    }
+
+    public void datainitialize(){
         api.getDeliveryparcel().enqueue(new Callback<DeliveryContainer>() {
             @Override
             public void onResponse(Call<DeliveryContainer> call, Response<DeliveryContainer> response) {
@@ -75,6 +94,23 @@ public class AcceptDeliveryActivity extends AppCompatActivity {
                                 LinearLayoutManager.VERTICAL, false));
                         AcceptDeliveryAdaptar adaptar = new AcceptDeliveryAdaptar(parcelInfos, getApplicationContext());
                         recyclerView.setAdapter(adaptar);}
+                }
+                else {
+                    try {
+                        // Log.e("tesstss", response.errorBody().string());
+                        try {
+                            JSONObject json = new JSONObject(response.errorBody().string().toString());
+                            Toast.makeText(AcceptDeliveryActivity.this, json.getString("message"), Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // String a=response.errorBody().string().toString();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    progressDialog.dismiss();
+
                 }
             }
 

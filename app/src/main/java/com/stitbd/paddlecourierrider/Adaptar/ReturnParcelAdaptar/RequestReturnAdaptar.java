@@ -44,11 +44,12 @@ public class RequestReturnAdaptar extends RecyclerView.Adapter<RequestReturnAdap
         holder.Invoice.setText(String.valueOf(returnS.get(position).getParcelInvoice()));
         holder.CustomerName.setText(String.valueOf(returnS.get(position).getCustomerName()));
         holder.CustomerPhn.setText(String.valueOf(returnS.get(position).getCustomerContactNumber()));
-        holder.CustomerAddress.setText(String.valueOf(returnS.get(position).getCustomerAddress()));
-        holder.TotalCollectAmount.setText("Collection Amount :" + String.valueOf(returnS.get(position).getTotalCollectAmount()));
-        holder.MerchantName.setText("Merchant Name :" + String.valueOf(returnS.get(position).getMerchantName()));
+//        holder.CustomerAddress.setText(String.valueOf(returnS.get(position).getMerchantAddress()));
+        holder.TotalCollectAmount.setText( String.valueOf(returnS.get(position).getTotalCollectAmount()));
+        holder.MerchantName.setText( String.valueOf(returnS.get(position).getMerchantName()));
         holder.ParcelStatus.setText(String.valueOf(returnS.get(position).getParcelStatus()));
         holder.optionMenu.setVisibility(View.GONE);
+        holder.CustomerAddress.setText(String.valueOf(returnS.get(position).getMerchantAddress()));
     }
 
     @Override

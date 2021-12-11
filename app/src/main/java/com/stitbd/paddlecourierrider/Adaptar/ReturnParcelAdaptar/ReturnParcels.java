@@ -49,10 +49,11 @@ public class ReturnParcels extends RecyclerView.Adapter<ReturnParcels.Viewholder
         holder.Invoice.setText(String.valueOf(returnS.get(position).getParcelInvoice()));
         holder.CustomerName.setText(String.valueOf(returnS.get(position).getCustomerName()));
         holder.CustomerPhn.setText(String.valueOf(returnS.get(position).getCustomerContactNumber()));
-        holder.CustomerAddress.setText(String.valueOf(returnS.get(position).getCustomerAddress()));
-        holder.TotalCollectAmount.setText("Collection Amount :" + String.valueOf(returnS.get(position).getTotalCollectAmount()));
-        holder.MerchantName.setText("Merchant Name :" + String.valueOf(returnS.get(position).getMerchantName()));
+        holder.CustomerAddress.setText(String.valueOf(returnS.get(position).getMerchantAddress()));
+        holder.TotalCollectAmount.setText( String.valueOf(returnS.get(position).getTotalCollectAmount()));
+        holder.MerchantName.setText(String.valueOf(returnS.get(position).getMerchantName()));
         holder.ParcelStatus.setText(String.valueOf(returnS.get(position).getParcelStatus()));
+        holder.Merchantphn.setText(String.valueOf(returnS.get(position).getMerchantContactNumber()));
         holder.optionMenu.setOnClickListener(new ReturnMenuClickListner(this,listener,holder,returnS.get(position)));
     }
 
@@ -62,7 +63,8 @@ public class ReturnParcels extends RecyclerView.Adapter<ReturnParcels.Viewholder
     }
 
     public class Viewholders extends RecyclerView.ViewHolder {
-        TextView Invoice, CustomerName, CustomerPhn, CustomerAddress, TotalCollectAmount, MerchantName, ParcelStatus;
+        TextView Invoice, CustomerName, CustomerPhn, CustomerAddress,
+                TotalCollectAmount, MerchantName, ParcelStatus,Merchantphn;
         ImageView optionMenu;
         public Viewholders(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -75,6 +77,7 @@ public class ReturnParcels extends RecyclerView.Adapter<ReturnParcels.Viewholder
             MerchantName = itemView.findViewById(R.id.tv_merchant_name);
             ParcelStatus = itemView.findViewById(R.id.tv_status);
             optionMenu = itemView.findViewById(R.id.iv_menu);
+            Merchantphn=itemView.findViewById(R.id.tv_merchant_phn);
         }
 
         public ImageView getoption() {

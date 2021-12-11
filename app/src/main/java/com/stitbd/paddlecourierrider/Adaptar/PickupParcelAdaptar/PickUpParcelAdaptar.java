@@ -1,9 +1,13 @@
 package com.stitbd.paddlecourierrider.Adaptar.PickupParcelAdaptar;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,17 +48,33 @@ public class PickUpParcelAdaptar extends RecyclerView.Adapter<PickUpParcelAdapta
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull PickUpParcelAdaptar.Viewholders holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull PickUpParcelAdaptar.Viewholders holder, @SuppressLint("RecyclerView") int position) {
 
         holder.Invoice.setText(String.valueOf(pickup.get(position).getParcelInvoice()));
         holder.CustomerName.setText(String.valueOf(pickup.get(position).getCustomerName()));
         holder.CustomerPhn.setText(String.valueOf(pickup.get(position).getCustomerContactNumber()));
         holder.CustomerAddress.setText(String.valueOf(pickup.get(position).getCustomerAddress()));
-        holder.TotalCollectAmount.setText("Collection Amount :" + String.valueOf(pickup.get(position).getTotalCollectAmount()));
-        holder.MerchantName.setText("Merchant Name :" + String.valueOf(pickup.get(position).getMerchantName()));
+        holder.TotalCollectAmount.setText( String.valueOf(pickup.get(position).getTotalCollectAmount()));
+        holder.MerchantName.setText(String.valueOf(pickup.get(position).getMerchantName()));
         holder.ParcelStatus.setText(String.valueOf(pickup.get(position).getParcelStatus()));
         holder.optionMenu.setOnClickListener(new PercelMenuClickListener(this, holder,
                 pickup.get(position), listener));
+        holder.Merchatnphn.setText(String.valueOf(pickup.get(position).getMerchantContactNumber()));
+
+
+   /*     holder.Call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String call = pickup.get(position).getCustomerContactNumber();
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse(call));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("",call);
+                context.startActivity(intent);
+
+
+            }
+        });*/
 
 
     }
@@ -66,8 +86,10 @@ public class PickUpParcelAdaptar extends RecyclerView.Adapter<PickUpParcelAdapta
 
     public class Viewholders extends RecyclerView.ViewHolder {
 
-        TextView Invoice, CustomerName, CustomerPhn, CustomerAddress, TotalCollectAmount, MerchantName, ParcelStatus;
+        TextView Invoice, CustomerName, CustomerPhn, CustomerAddress,
+                TotalCollectAmount, MerchantName, ParcelStatus,Merchatnphn;
         ImageView optionMenu;
+        Button Call;
 
         public Viewholders(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -80,6 +102,8 @@ public class PickUpParcelAdaptar extends RecyclerView.Adapter<PickUpParcelAdapta
             MerchantName = itemView.findViewById(R.id.tv_merchant_name);
             ParcelStatus = itemView.findViewById(R.id.tv_status);
             optionMenu = itemView.findViewById(R.id.iv_menu);
+            Merchatnphn=itemView.findViewById(R.id.tv_merchant_phn);
+        /*    Call=itemView.findViewById(R.id.call);*/
 
 
         }

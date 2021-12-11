@@ -3,6 +3,7 @@ package com.stitbd.paddlecourierrider.Activity.DeliveryParcel;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -10,12 +11,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.stitbd.paddlecourierrider.Activity.CollectionParcel.CollectionParcelActivity;
 import com.stitbd.paddlecourierrider.Adaptar.DeliveryParcelListAdaptar.DeliveryAdaptar;
 import com.stitbd.paddlecourierrider.Model.DeliveryParcel.DeliveryContainer;
 import com.stitbd.paddlecourierrider.Network.Api;
 import com.stitbd.paddlecourierrider.Network.RetrofitClient;
 import com.stitbd.paddlecourierrider.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +40,15 @@ public class DeliveryParcelListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delivery_parcel_list);
 
+        SwipeRefreshLayout Swip=findViewById(R.id.swip);
+        Swip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                datainitialize();
+                Swip.setRefreshing(false);
+            }
+        });
+
         recyclerView = findViewById(R.id.rv_pickup_list);
         progressDialog = new ProgressDialog(DeliveryParcelListActivity.this);
         progressDialog.setMessage("Please Wait......");
@@ -46,7 +63,7 @@ public class DeliveryParcelListActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-       // datainitialize();
+        // datainitialize();
     }
 
     @Override
@@ -60,9 +77,8 @@ public class DeliveryParcelListActivity extends AppCompatActivity {
         //Toast.makeText(PickupParcelActivity.this, "tessting", Toast.LENGTH_SHORT).show();
 
 
-
         api = RetrofitClient.get(getApplicationContext()).create(Api.class);
-         progressDialog.show();
+        progressDialog.show();
         api.getDeliveryparcel().enqueue(new Callback<DeliveryContainer>() {
             @Override
             public void onResponse(Call<DeliveryContainer> call, Response<DeliveryContainer> response) {
@@ -81,6 +97,23 @@ public class DeliveryParcelListActivity extends AppCompatActivity {
                     recyclerView.setAdapter(adaptar);
                     Log.e("hhh", String.valueOf(response.body().getParcels().size()));
                     progressDialog.dismiss();
+                }
+                else {
+                    try {
+                        // Log.e("tesstss", response.errorBody().string());
+                        try {
+                            JSONObject json = new JSONObject(response.errorBody().string().toString());
+                            Toast.makeText(DeliveryParcelListActivity.this, json.getString("message"), Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // String a=response.errorBody().string().toString();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    progressDialog.dismiss();
+
                 }
             }
 

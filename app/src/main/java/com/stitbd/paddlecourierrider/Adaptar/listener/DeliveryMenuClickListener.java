@@ -140,7 +140,6 @@ public class DeliveryMenuClickListener implements View.OnClickListener {
                             public void onClick(View view) {
                                 sendDatatoServerBYConfirm(percel, spinnerPosition);
 
-
                             }
                         });
 

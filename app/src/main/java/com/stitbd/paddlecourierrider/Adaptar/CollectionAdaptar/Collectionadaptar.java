@@ -42,7 +42,7 @@ public class Collectionadaptar extends RecyclerView.Adapter<Collectionadaptar.Vi
         holder.CustomerName.setText(String.valueOf(collection.get(position).getCustomerName()));
         holder.CustomerPhn.setText(String.valueOf(collection.get(position).getCustomerContactNumber()));
         holder.CustomerAddress.setText(String.valueOf(collection.get(position).getCustomerAddress()));
-        holder.TotalCollectAmount.setText("Collection Amount :" + String.valueOf(collection.get(position).getCollectAmount()));
+        holder.TotalCollectAmount.setText( String.valueOf(collection.get(position).getCollectAmount()));
         holder.MerchantName.setText("Merchant Name :" + String.valueOf(collection.get(position).getMerchantName()));
         holder.ParcelStatus.setText(String.valueOf(collection.get(position).getParcelStatus()));
         holder.nav.setVisibility(View.GONE);

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,13 +13,18 @@ import android.widget.Toast;
 
 import com.stitbd.paddlecourierrider.Network.Api;
 import com.stitbd.paddlecourierrider.Network.RetrofitClient;
+import com.stitbd.paddlecourierrider.R;
 import com.stitbd.paddlecourierrider.Util.Constant;
 import com.stitbd.paddlecourierrider.Util.MySharedPreference;
 import com.stitbd.paddlecourierrider.databinding.ActivityLoginBinding;
 import com.google.gson.JsonObject;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
+import io.github.muddz.styleabletoast.StyleableToast;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,52 +54,65 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (!TextUtils.isEmpty(binding.etUserName.getText().toString())) {
 //                    if (!TextUtils.isEmpty(binding.tvForgotPassword.getText().toString())) {
-                        progressDialog.show();
-                        api = RetrofitClient.noInterceptor().create(Api.class);
-                        Call<JsonObject> call = api.login(binding.etUserName.getText().toString(),
-                                binding.etPassword.getText().toString());
-                        call.enqueue(new Callback<JsonObject>() {
-                            @Override
-                            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                                //  Log.e("tesst",response.toString());
-                                progressDialog.dismiss();
-                                if (response.isSuccessful() && response.body() != null) {
-                                    String token = response.body().get("token").getAsString();
-                                    JsonObject rider = response.body().getAsJsonObject("rider");
-                                    Log.e("tesst", token);
-                                    String name = rider.get("name").getAsString();
-                                    String phn = rider.get("contact_number").getAsString();
-                                    String MercentId = rider.get("id").getAsString();
-                                    Log.e("tesst", response.body().toString());
+                    progressDialog.show();
+                    api = RetrofitClient.noInterceptor().create(Api.class);
+                    Call<JsonObject> call = api.login(binding.etUserName.getText().toString(),
+                            binding.etPassword.getText().toString());
+                    call.enqueue(new Callback<JsonObject>() {
+                        @Override
+                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                            //  Log.e("tesst",response.toString());
+                            progressDialog.dismiss();
+                            if (response.isSuccessful() && response.body() != null) {
+                                String token = response.body().get("token").getAsString();
+                                JsonObject rider = response.body().getAsJsonObject("rider");
+                                Log.e("tesst", token);
+                                String name = rider.get("name").getAsString();
+                                String phn = rider.get("contact_number").getAsString();
+                                String MercentId = rider.get("id").getAsString();
+                                Log.e("tesst", response.body().toString());
 
-                                    MySharedPreference.getInstance(LoginActivity.this).edit()
-                                            .putString(Constant.TOKEN, token).putString(Constant.NAME, name).putString(Constant.PHONE, phn)
-                                            .putString(Constant.MERCENTID, MercentId).apply();
-                                    startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
-                                    finish();
+                                MySharedPreference.getInstance(LoginActivity.this).edit()
+                                        .putString(Constant.TOKEN, token).putString(Constant.NAME, name).putString(Constant.PHONE, phn)
+                                        .putString(Constant.MERCENTID, MercentId).apply();
+                                startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                                finish();
 
-                                } else {
-                                    progressDialog.dismiss();
+                            } else {
+                                try {
+                                    // Log.e("tesstss", response.errorBody().string());
                                     try {
-                                        Log.e("tesst", response.errorBody().string());
-                                    } catch (IOException e) {
+                                        JSONObject json = new JSONObject(response.errorBody().string().toString());
+                                        new StyleableToast
+                                                .Builder(getApplicationContext())
+                                                .text(json.getString("message"))
+                                                .textColor(Color.WHITE)
+                                                .cornerRadius(90)
+                                                .backgroundColor(Color.RED)
+                                                .show();
+
+                                    } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
-                                    Toast.makeText(LoginActivity.this, "Something Wrong", Toast.LENGTH_SHORT).show();
+
+                                } catch (IOException e) {
+                                    e.printStackTrace();
                                 }
+                                progressDialog.dismiss();
+
                             }
 
-                            @Override
-                            public void onFailure(Call<JsonObject> call, Throwable t) {
-                                progressDialog.dismiss();
-                                Log.e("tesst", t.toString());
-                                Toast.makeText(getApplicationContext(), "Network or Server Error", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-//                    } else {
-//                        binding.etPassword.setError("Please Input Valid email!!");
-//                        binding.etPassword.requestFocus();
-//                    }
+                        }
+
+                        @Override
+                        public void onFailure(Call<JsonObject> call, Throwable t) {
+                            progressDialog.dismiss();
+                            Log.e("tesst", t.toString());
+                            Toast.makeText(getApplicationContext(), "Network or Server Error",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                 } else {
                     binding.etUserName.setError("Please Input Valid password!!");
                     binding.etUserName.requestFocus();
