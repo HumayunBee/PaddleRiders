@@ -94,7 +94,7 @@ public class RequestReturnActivity extends AppCompatActivity {
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
                                 LinearLayoutManager.VERTICAL, false));
-                        RequestReturnAdaptar adaptar = new RequestReturnAdaptar(parcelInfos, getApplicationContext());
+                        RequestReturnAdaptar adaptar = new RequestReturnAdaptar(parcelInfos, getApplicationContext(),RequestReturnActivity.this);
                         recyclerView.setAdapter(adaptar);
                         Log.e("ddd", String.valueOf(response.body().getParcels().size()));
                     }

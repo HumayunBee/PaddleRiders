@@ -110,7 +110,7 @@ public class RequestPickupActivity extends AppCompatActivity {
                                 //  Toast.makeText(RequestPickupActivity.this, "sssssssss", Toast.LENGTH_SHORT).show();
                                 datainitialize();
                             }
-                        });
+                        },RequestPickupActivity.this);
                         recyclerView.setAdapter(adaptar);
 
                 }
