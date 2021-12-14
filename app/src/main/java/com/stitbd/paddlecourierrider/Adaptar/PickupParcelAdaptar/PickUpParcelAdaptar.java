@@ -111,7 +111,7 @@ public class PickUpParcelAdaptar extends RecyclerView.Adapter<PickUpParcelAdapta
         TextView Invoice, CustomerName, CustomerPhn, CustomerAddress,
                 TotalCollectAmount, MerchantName, ParcelStatus,Merchatnphn;
         ImageView optionMenu;
-        ImageButton Call,Merchant_call;
+        Button Call,Merchant_call;
 
         public Viewholders(@NonNull @NotNull View itemView) {
             super(itemView);

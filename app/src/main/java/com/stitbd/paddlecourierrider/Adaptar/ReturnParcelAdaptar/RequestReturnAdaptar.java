@@ -11,6 +11,7 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -103,7 +104,7 @@ public class RequestReturnAdaptar extends RecyclerView.Adapter<RequestReturnAdap
         TextView Invoice, CustomerName, CustomerPhn, CustomerAddress, TotalCollectAmount, MerchantName, ParcelStatus,
                 Merchatnphn;
         ImageView optionMenu;
-        ImageButton Call, Merchant_call;
+        Button Call, Merchant_call;
 
         public Viewholders(@NonNull @NotNull View itemView) {
             super(itemView);

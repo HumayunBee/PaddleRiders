@@ -136,13 +136,14 @@
                     android:textSize="@dimen/text_size_h5"
                     tools:hint="123456789" />
 
-                <ImageButton
+                <Button
                     android:id="@+id/call"
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:background="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:background="@drawable/bg_button"
                     android:scaleType="fitXY"
-                    android:src="@drawable/call_start" />
+                    android:text="call"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
@@ -213,14 +214,23 @@
                         android:textStyle="bold"
                         app:drawableStartCompat="@drawable/ic_point_red"
                         tools:hint="01712654789" />
-                    <ImageButton
-                        android:id="@+id/merchant_call"
-                        android:layout_width="50dp"
-                        android:layout_height="30dp"
-                        android:background="#B1B0B0"
-                        android:scaleType="fitXY"
-                        android:layout_marginLeft="5dp"
-                        android:src="@drawable/call_start" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/merchant_call"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/bg_button"
+                            android:scaleType="fitXY"
+                            android:text="call"
+                            android:textColor="@color/white" />
+
+                    </LinearLayout>
 
 
                 </LinearLayout>
@@ -229,7 +239,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
-
 
 
                 </LinearLayout>
