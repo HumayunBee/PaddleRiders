@@ -99,7 +99,7 @@ public class AcceptPickActivity extends AppCompatActivity {
                                     public void onItemClick(int position) {
 
                                     }
-                                });
+                                },AcceptPickActivity.this);
                         recyclerView.setAdapter(adaptar);
                     }
                 } else {

@@ -67,6 +67,8 @@ public class PickupParcelActivity extends AppCompatActivity {
                 Swip.setRefreshing(false);
             }
         });
+
+
         progressDialog = new ProgressDialog(PickupParcelActivity.this);
         progressDialog.setMessage("Please Wait......");
         progressDialog.setCancelable(false);
@@ -119,7 +121,7 @@ public class PickupParcelActivity extends AppCompatActivity {
                             datainitialize();
                             // Toast.makeText(PickupParcelActivity.this, "tessting", Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    },PickupParcelActivity.this);
                     recyclerView.setAdapter(adaptar);
                     Log.e("ddd", String.valueOf(response.body().getParcels().size()));
                 } else {

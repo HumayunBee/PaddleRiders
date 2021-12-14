@@ -1,17 +1,23 @@
 package com.stitbd.paddlecourierrider.Adaptar.PickupParcelAdaptar;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.stitbd.paddlecourierrider.Adaptar.listener.PercelMenuClickListener;
@@ -33,10 +39,12 @@ public class PickUpParcelAdaptar extends RecyclerView.Adapter<PickUpParcelAdapta
 
     List<Parcel> pickup = new ArrayList<>();
     Context context;
+    Activity activity;
 
-    public PickUpParcelAdaptar(List<Parcel> pickup, Context context, OnItemClickListener listener) {
+    public PickUpParcelAdaptar(List<Parcel> pickup, Context context, OnItemClickListener listener,Activity activity) {
         this.pickup = pickup;
         this.context = context;
+        this.activity = activity;
         this.listener = listener;
     }
 
@@ -62,19 +70,33 @@ public class PickUpParcelAdaptar extends RecyclerView.Adapter<PickUpParcelAdapta
         holder.Merchatnphn.setText(String.valueOf(pickup.get(position).getMerchantContactNumber()));
 
 
-   /*     holder.Call.setOnClickListener(new View.OnClickListener() {
+        holder.Call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String call = pickup.get(position).getCustomerContactNumber();
-                Intent intent = new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse(call));
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("",call);
-                context.startActivity(intent);
+                if (isCallPermissionGranted(context)){
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:"+call));
+                    callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(callIntent);
+                }
 
 
             }
-        });*/
+        });
+
+        holder.Merchant_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mcall = pickup.get(position).getMerchantContactNumber();
+                if (isCallPermissionGranted(context)){
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:"+mcall));
+                    callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(callIntent);
+                }
+            }
+        });
 
 
     }
@@ -89,7 +111,7 @@ public class PickUpParcelAdaptar extends RecyclerView.Adapter<PickUpParcelAdapta
         TextView Invoice, CustomerName, CustomerPhn, CustomerAddress,
                 TotalCollectAmount, MerchantName, ParcelStatus,Merchatnphn;
         ImageView optionMenu;
-        Button Call;
+        ImageButton Call,Merchant_call;
 
         public Viewholders(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -103,7 +125,8 @@ public class PickUpParcelAdaptar extends RecyclerView.Adapter<PickUpParcelAdapta
             ParcelStatus = itemView.findViewById(R.id.tv_status);
             optionMenu = itemView.findViewById(R.id.iv_menu);
             Merchatnphn=itemView.findViewById(R.id.tv_merchant_phn);
-        /*    Call=itemView.findViewById(R.id.call);*/
+            Call=itemView.findViewById(R.id.call);
+            Merchant_call=itemView.findViewById(R.id.merchant_call);
 
 
         }
@@ -113,5 +136,18 @@ public class PickUpParcelAdaptar extends RecyclerView.Adapter<PickUpParcelAdapta
         }
     }
 
-
+    public  boolean isCallPermissionGranted(Context context1) {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ActivityCompat.checkSelfPermission(context1,android.Manifest.permission.CALL_PHONE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CALL_PHONE}, 1);
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
+    }
 }

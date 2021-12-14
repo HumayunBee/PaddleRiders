@@ -80,7 +80,6 @@ public class LoginActivity extends AppCompatActivity {
 
                             } else {
                                 try {
-                                    // Log.e("tesstss", response.errorBody().string());
                                     try {
                                         JSONObject json = new JSONObject(response.errorBody().string().toString());
                                         new StyleableToast
