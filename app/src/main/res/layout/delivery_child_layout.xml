@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/two"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="35dp"
             android:text="Request Delivery"
             android:textColor="@color/colorG"
             android:textSize="@dimen/sixteen" />
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:padding="@dimen/two"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="35dp"
             android:text="Accept Delivery"
             android:textColor="@color/colorG"
             android:textSize="@dimen/sixteen" />

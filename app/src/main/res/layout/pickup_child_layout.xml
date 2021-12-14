@@ -16,10 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_nav_add_parcel" />
+
 
         <TextView
             android:id="@+id/tv_nav_rpickup_parcel_list"
@@ -27,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/two"
+            android:layout_marginLeft="35dp"
             android:text="Request Pickup"
             android:textColor="@color/colorG"
             android:textSize="@dimen/sixteen" />
@@ -49,14 +47,12 @@
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/play">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_nav_add_parcel" />
+
 
         <TextView
             android:id="@+id/tv_nav_accept_parcel_list"
             style="@style/RobotoRegular"
+            android:layout_marginLeft="35dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/two"

@@ -16,13 +16,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_nav_add_parcel" />
+
 
         <TextView
             android:id="@+id/tv_nav_pickup_parcel_list"
+            android:layout_marginLeft="35dp"
             style="@style/RobotoRegular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,14 +46,11 @@
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/play">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_nav_add_parcel" />
 
         <TextView
             android:id="@+id/tv_nav_accept_parcel_list"
             style="@style/RobotoRegular"
+            android:layout_marginLeft="35dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
